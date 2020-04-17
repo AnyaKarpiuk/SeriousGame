@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +12,7 @@ public class DropdownMenu : MonoBehaviour
 	public GameObject panel;
 	public GameObject border;
 
-	//method for openening dropdown menu
+	//when button is pressed - open the animated menu
     public void openMenu()
     {
     	
@@ -28,8 +28,8 @@ public class DropdownMenu : MonoBehaviour
     			animator.SetBool("Opened", !isOpened);
     			animator2.SetBool("Opened", !isOpened2);
     		} 
-    		
     	} 
+
     }
  
 }
