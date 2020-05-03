@@ -510,6 +510,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e4c40f244cbdd428289b21ce3478ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  _speechRecognition: {fileID: 0}
+  _startRecordButton: {fileID: 0}
+  _stopRecordButton: {fileID: 0}
+  _getOperationButton: {fileID: 0}
+  _getListOperationsButton: {fileID: 0}
+  _detectThresholdButton: {fileID: 0}
+  _cancelAllRequestsButton: {fileID: 0}
+  _recognizeButton: {fileID: 0}
+  _refreshMicrophonesButton: {fileID: 0}
+  _speechRecognitionState: {fileID: 0}
+  _resultText: {fileID: 0}
+  _voiceDetectionToggle: {fileID: 0}
+  _recognizeDirectlyToggle: {fileID: 0}
+  _longRunningRecognizeToggle: {fileID: 0}
+  _languageDropdown: {fileID: 0}
+  _microphoneDevicesDropdown: {fileID: 0}
+  _contextPhrasesInputField: {fileID: 0}
+  _operationIdInputField: {fileID: 0}
+  _voiceLevelImage: {fileID: 0}
 --- !u!1 &195862881
 GameObject:
   m_ObjectHideFlags: 0
@@ -5718,7 +5738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1721448102
@@ -6320,7 +6340,12 @@ PrefabInstance:
     - target: {fileID: 114000013716498916, guid: 73477f779c490234d82ad11f2536dbd9,
         type: 3}
       propertyPath: apiKey
-      value: AIzaSyDr3LQnjqve0ukc6yCRfJhE2lwl7avE344
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013716498916, guid: 73477f779c490234d82ad11f2536dbd9,
+        type: 3}
+      propertyPath: isDontDestroyOnLoad
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73477f779c490234d82ad11f2536dbd9, type: 3}

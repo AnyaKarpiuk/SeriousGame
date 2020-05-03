@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
         
     }
 
-    //when a button is pressed - go to start of the game
+    //go to start of the game
     public void startButton() {
     	SceneManager.LoadScene(1);
     }
@@ -24,12 +24,12 @@ public class Menu : MonoBehaviour
     	SceneManager.LoadScene(0);
     }
 
-    //when the button is pressed - open a progress screen
+    //open a progress screen
     public void progressButton() {
     	SceneManager.LoadScene(2);
     }
 
-    //when the button is pressed - start to practise first question
+    //start to practise first question
     public void questionOneButton() {
     	SceneManager.LoadScene(3);
     }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 {
-public class SpeechToText : MonoBehaviour
-{
-    private GCSpeechRecognition _speechRecognition;
+	public class SpeechToText : MonoBehaviour
+	{
+		private GCSpeechRecognition _speechRecognition;
 
 		private Button _startRecordButton,
 					   _stopRecordButton,
@@ -21,7 +21,8 @@ public class SpeechToText : MonoBehaviour
 
 		private Image _speechRecognitionState;
 
-		private Text _resultText;
+		private Text _resultText,
+					 _answerText;
 
 		private Toggle _voiceDetectionToggle,
 					   _recognizeDirectlyToggle,
@@ -39,23 +40,23 @@ public class SpeechToText : MonoBehaviour
 		{
 			_speechRecognition = GCSpeechRecognition.Instance;
 			_speechRecognition.RecognizeSuccessEvent += RecognizeSuccessEventHandler;
-			//_speechRecognition.RecognizeFailedEvent += RecognizeFailedEventHandler;
+			_speechRecognition.RecognizeFailedEvent += RecognizeFailedEventHandler;
 			//_speechRecognition.LongRunningRecognizeSuccessEvent += LongRunningRecognizeSuccessEventHandler;
-			//_speechRecognition.LongRunningRecognizeFailedEvent += LongRunningRecognizeFailedEventHandler;
-			//_speechRecognition.GetOperationSuccessEvent += GetOperationSuccessEventHandler;
-			//_speechRecognition.GetOperationFailedEvent += GetOperationFailedEventHandler;
-			//_speechRecognition.ListOperationsSuccessEvent += ListOperationsSuccessEventHandler;
-			//_speechRecognition.ListOperationsFailedEvent += ListOperationsFailedEventHandler;
+			_speechRecognition.LongRunningRecognizeFailedEvent += LongRunningRecognizeFailedEventHandler;
+			_speechRecognition.GetOperationSuccessEvent += GetOperationSuccessEventHandler;
+			_speechRecognition.GetOperationFailedEvent += GetOperationFailedEventHandler;
+			_speechRecognition.ListOperationsSuccessEvent += ListOperationsSuccessEventHandler;
+			_speechRecognition.ListOperationsFailedEvent += ListOperationsFailedEventHandler;
 
 			_speechRecognition.FinishedRecordEvent += FinishedRecordEventHandler;
 			_speechRecognition.StartedRecordEvent += StartedRecordEventHandler;
 			_speechRecognition.RecordFailedEvent += RecordFailedEventHandler;
 
-			//_speechRecognition.BeginTalkigEvent += BeginTalkigEventHandler;
-			//_speechRecognition.EndTalkigEvent += EndTalkigEventHandler;
+			_speechRecognition.BeginTalkigEvent += BeginTalkigEventHandler;
+			_speechRecognition.EndTalkigEvent += EndTalkigEventHandler;
 
-			_startRecordButton = transform.Find("Canvas/StartRecordButton").GetComponent<Button>();
-			_stopRecordButton = transform.Find("Canvas/StopRecordButton").GetComponent<Button>();
+			_startRecordButton = transform.Find("Canvas/Button_StartRecord").GetComponent<Button>();
+			_stopRecordButton = transform.Find("Canvas/Button_StopRecord").GetComponent<Button>();
 			_getOperationButton = transform.Find("Canvas/Button_GetOperation").GetComponent<Button>();
 			_getListOperationsButton = transform.Find("Canvas/Button_GetListOperations").GetComponent<Button>();
 			_detectThresholdButton = transform.Find("Canvas/Button_DetectThreshold").GetComponent<Button>();
@@ -66,6 +67,7 @@ public class SpeechToText : MonoBehaviour
 			_speechRecognitionState = transform.Find("Canvas/Image_RecordState").GetComponent<Image>();
 
 			_resultText = transform.Find("Canvas/Panel_ContentResult/Text_Result").GetComponent<Text>();
+			_answerText = transform.Find("Canvas/TextAnswer").GetComponent<Text>();
 
 			_voiceDetectionToggle = transform.Find("Canvas/Toggle_DetectVoice").GetComponent<Toggle>();
 			_recognizeDirectlyToggle = transform.Find("Canvas/Toggle_RecognizeDirectly").GetComponent<Toggle>();
@@ -74,7 +76,7 @@ public class SpeechToText : MonoBehaviour
 			_languageDropdown = transform.Find("Canvas/Dropdown_Language").GetComponent<Dropdown>();
 			_microphoneDevicesDropdown = transform.Find("Canvas/Dropdown_MicrophoneDevices").GetComponent<Dropdown>();		
 
-			_contextPhrasesInputField = transform.Find("Canvas/SpeechContext").GetComponent<InputField>();
+			_contextPhrasesInputField = transform.Find("Canvas/InputField_SpeechContext").GetComponent<InputField>();
 			_operationIdInputField = transform.Find("Canvas/InputField_Operation").GetComponent<InputField>();
 
 			_voiceLevelImage = transform.Find("Canvas/Panel_VoiceLevel/Image_Level").GetComponent<Image>();
@@ -109,19 +111,19 @@ public class SpeechToText : MonoBehaviour
 		private void OnDestroy()
 		{
 			_speechRecognition.RecognizeSuccessEvent -= RecognizeSuccessEventHandler;
-			//_speechRecognition.RecognizeFailedEvent -= RecognizeFailedEventHandler;
+			_speechRecognition.RecognizeFailedEvent -= RecognizeFailedEventHandler;
 			//_speechRecognition.LongRunningRecognizeSuccessEvent -= LongRunningRecognizeSuccessEventHandler;
-			//_speechRecognition.LongRunningRecognizeFailedEvent -= LongRunningRecognizeFailedEventHandler;
-			//_speechRecognition.GetOperationSuccessEvent -= GetOperationSuccessEventHandler;
-			//_speechRecognition.GetOperationFailedEvent -= GetOperationFailedEventHandler;
-			//_speechRecognition.ListOperationsSuccessEvent -= ListOperationsSuccessEventHandler;
-			//_speechRecognition.ListOperationsFailedEvent -= ListOperationsFailedEventHandler;
+			_speechRecognition.LongRunningRecognizeFailedEvent -= LongRunningRecognizeFailedEventHandler;
+			_speechRecognition.GetOperationSuccessEvent -= GetOperationSuccessEventHandler;
+			_speechRecognition.GetOperationFailedEvent -= GetOperationFailedEventHandler;
+			_speechRecognition.ListOperationsSuccessEvent -= ListOperationsSuccessEventHandler;
+			_speechRecognition.ListOperationsFailedEvent -= ListOperationsFailedEventHandler;
 
 			_speechRecognition.FinishedRecordEvent -= FinishedRecordEventHandler;
 			_speechRecognition.StartedRecordEvent -= StartedRecordEventHandler;
 			_speechRecognition.RecordFailedEvent -= RecordFailedEventHandler;
 
-			//_speechRecognition.EndTalkigEvent -= EndTalkigEventHandler;
+			_speechRecognition.EndTalkigEvent -= EndTalkigEventHandler;
 		}
 
 		private void Update()
@@ -180,6 +182,7 @@ public class SpeechToText : MonoBehaviour
 			_stopRecordButton.interactable = true;
 			_detectThresholdButton.interactable = false;
 			_resultText.text = string.Empty;
+			_answerText.text = string.Empty;
 
 			_speechRecognition.StartRecord(_voiceDetectionToggle.isOn);
 		}
@@ -302,39 +305,105 @@ public class SpeechToText : MonoBehaviour
 			}
 		}
 
+		private void GetOperationFailedEventHandler(string error)
+		{
+			_resultText.text = "Get Operation Failed: " + error;
+		}
+
+		private void ListOperationsFailedEventHandler(string error)
+		{
+			_resultText.text = "List Operations Failed: " + error;
+		}
+
+		private void RecognizeFailedEventHandler(string error)
+        {
+            _resultText.text = "Recognize Failed: " + error;
+        }
+
+		private void LongRunningRecognizeFailedEventHandler(string error)
+		{
+			_resultText.text = "Long Running Recognize Failed: " + error;
+		}
+
+		private void ListOperationsSuccessEventHandler(ListOperationsResponse operationsResponse)
+		{
+			_resultText.text = "List Operations Success.\n";
+
+			if (operationsResponse.operations != null)
+			{
+				_resultText.text += "Operations:\n";
+
+				foreach (var item in operationsResponse.operations)
+				{
+					_resultText.text += "name: " + item.name + "; done: " + item.done + "\n";
+				}
+			}
+		}
+
+		private void GetOperationSuccessEventHandler(Operation operation)
+		{
+			_resultText.text = "Get Operation Success.\n";
+			_resultText.text += "name: " + operation.name + "; done: " + operation.done;
+
+			if(operation.done && (operation.error == null || string.IsNullOrEmpty(operation.error.message)))
+			{
+				InsertRecognitionResponseInfo(operation.response);
+			}		
+		}
+
 		private void RecognizeSuccessEventHandler(RecognitionResponse recognitionResponse)
         {
-			_resultText.text = "Your answer is: \n";
+			_answerText.text = "Your answer: ";
 			InsertRecognitionResponseInfo(recognitionResponse);
         }
 
-        // method for displaying converted text
+        //display converted speech to text
 		private void InsertRecognitionResponseInfo(RecognitionResponse recognitionResponse)
 		{
+
+			//if the player didn't say anything or his voice was too low - assign
+			//a message asking to try again to _resultText
+			//else assign the player's answer
 			if (recognitionResponse == null || recognitionResponse.results.Length == 0)
 			{
-				_resultText.text = "Sorry! Couldn't hear you. Try again.";
+
+				_answerText.text = "Couldn't hear you. \nPlease, try again!";
 				return;
+
+			} else {
+
+				_resultText.text += "\n" + recognitionResponse.results[0].alternatives[0].transcript;
+
 			}
 
-			//_resultText.text += "\n" + recognitionResponse.results[0].alternatives[0].transcript;
+			//var words = recognitionResponse.results[0].alternatives[0].words;
 
-			var words = recognitionResponse.results[0].alternatives[0].words;
+			// if (words != null)
+			// {
+			// 	string times = string.Empty;
 
-			if (words != null)
-			{
-				string times = string.Empty;
+			// 	foreach (var item in recognitionResponse.results[0].alternatives[0].words)
+			// 	{
+			// 		times += "<color=green>" + item.word;
+			// 	}
 
-				foreach (var item in recognitionResponse.results[0].alternatives[0].words)
-				{
-					times += "<color=green>" + item.word + " </color>";
-				}
+			// 	_resultText.text += "\n";
+			// }
 
-				_resultText.text += "\n" + times;
+			// string other = "\nDetected alternatives: ";
 
-				}
+			// foreach (var result in recognitionResponse.results)
+			// {
+			// 	foreach (var alternative in result.alternatives)
+			// 	{
+			// 		if (recognitionResponse.results[0].alternatives[0] != alternative)
+			// 		{
+			// 			other += alternative.transcript + ", ";
+			// 		}
+			// 	}
+			// }
 
+			//_resultText.text += other;
 		}
     }
-
 }

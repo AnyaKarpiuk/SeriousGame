@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3cf6508ad2d1bd54d86012a7b20fc00a
+guid: 8688b61b185aaaf48a510aad386b700d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Marck Script
+  fontName: Lobster
   fontNames:
-  - Marck Script
+  - Lobster
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
