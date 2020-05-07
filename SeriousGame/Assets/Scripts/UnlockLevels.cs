@@ -4,45 +4,49 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//Activates next level buttons in Level Scene if the player is successful
+
 public class UnlockLevels : MonoBehaviour
 {
 
-	//public Button levelOne, levelTwo, levelThree, levelFour;
 	public Button[] buttons;
-    
+	public Image[] lockImages;
+	public GameObject star;
+
     void Start()
     {
-    	int levelPassed = PlayerPrefs.GetInt("LevelPassed", 2);
+    	int levelPassed = PlayerPrefs.GetInt("LevelPassed", 4);
+
+    	//iterate through each button in the aray
+    	//if its index matches levelPassed make it active
     	for (int i = 0; i < buttons.Length; i++)
         {
-        	if (i + 2 > levelPassed) buttons[i].interactable = false;
+        	//iterate through each image in the array
+        	for (int j = 0; j < lockImages.Length; j++)
+        	{
+        		if (i + 4 > levelPassed) 
+        		{
+        			buttons[i].interactable = false;
+
+        			//if an index of a button in the array matches index of 
+        			//an image in the array dissable lockImage
+        			if(buttons[j].interactable == false){
+        				lockImages[j].enabled = false;
+        			}
+        		}
+        	}
+
         }
-        // levelTwo.interactable = false;
-        // levelThree.interactable = false;
-        // levelFour.interactable = false;
-
-        // switch(levelPassed) 
-        // {
-        // 	case 1:
-        // 		levelTwo.interactable = true;
-        // 		break;
-        // 	case 2:
-        // 		levelTwo.interactable = true;
-        // 		levelThree.interactable = true;
-        // 	 	break;
-        	// case 3:
-        	// 	levelTwo.interactable = true;
-        	// 	levelThree.interactable = true;
-        	// 	levelFour.interactable = true;
-        	// 	break;
-        //}
-
-        
     }
 
+    //method for changing scenes 
     public void levelToload(int level) 
     {
     	SceneManager.LoadScene(level);
     }
 
+    //reset button
+    public void reset(){
+    	PlayerPrefs.DeleteAll();
+    }
 }
