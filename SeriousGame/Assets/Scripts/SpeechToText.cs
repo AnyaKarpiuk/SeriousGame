@@ -21,7 +21,7 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 
 		private Image _speechRecognitionState;
 
-		private Text _resultText,
+		public Text _resultText,
 					 _answerText;
 
 		private Toggle _voiceDetectionToggle,
@@ -36,7 +36,7 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 
 		private Image _voiceLevelImage;
 
-		private void Start()
+		public void Start()
 		{
 			_speechRecognition = GCSpeechRecognition.Instance;
 			_speechRecognition.RecognizeSuccessEvent += RecognizeSuccessEventHandler;
@@ -126,7 +126,7 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 			_speechRecognition.EndTalkigEvent -= EndTalkigEventHandler;
 		}
 
-		private void Update()
+		public void Update()
 		{
 			if(_speechRecognition.IsRecording)
 			{
@@ -366,44 +366,12 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 			//else assign the player's answer
 			if (recognitionResponse == null || recognitionResponse.results.Length == 0)
 			{
-
 				_answerText.text = "Couldn't hear you. \nPlease, try again!";
 				return;
-
 			} else {
-
 				_resultText.text += "\n" + recognitionResponse.results[0].alternatives[0].transcript;
-
 			}
 
-			//var words = recognitionResponse.results[0].alternatives[0].words;
-
-			// if (words != null)
-			// {
-			// 	string times = string.Empty;
-
-			// 	foreach (var item in recognitionResponse.results[0].alternatives[0].words)
-			// 	{
-			// 		times += "<color=green>" + item.word;
-			// 	}
-
-			// 	_resultText.text += "\n";
-			// }
-
-			// string other = "\nDetected alternatives: ";
-
-			// foreach (var result in recognitionResponse.results)
-			// {
-			// 	foreach (var alternative in result.alternatives)
-			// 	{
-			// 		if (recognitionResponse.results[0].alternatives[0] != alternative)
-			// 		{
-			// 			other += alternative.transcript + ", ";
-			// 		}
-			// 	}
-			// }
-
-			//_resultText.text += other;
 		}
     }
 }

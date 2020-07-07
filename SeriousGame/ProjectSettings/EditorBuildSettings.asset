@@ -12,24 +12,24 @@ EditorBuildSettings:
     path: Assets/Scenes/QuestionsList.unity
     guid: 635848743d3aa4d429c02fe75e6c7d75
   - enabled: 1
-    path: Assets/Scenes/Progress.unity
-    guid: 0c601f3fe462f7f43ab4c71cf0f09a13
-  - enabled: 1
     path: Assets/Scenes/Question1.unity
     guid: 42a4135d2bae7354d984269c247ba69f
   - enabled: 1
-    path: Assets/Scenes/Step11.unity
-    guid: b65e6b57cbb7c8549b59ca6c27a5529b
+    path: Assets/Scenes/Vocabulary1.unity
+    guid: 9476992e45de290419247dabe768c61b
   - enabled: 1
-    path: Assets/Scenes/Step12.unity
+    path: Assets/Scenes/Advices2.unity
     guid: 96c13358657121b47bcf89c17f144619
   - enabled: 1
-    path: Assets/Scenes/Step13.unity
+    path: Assets/Scenes/Examples.unity
     guid: a3045edb1bb4eb04ebb77ac93e7f8916
   - enabled: 1
-    path: Assets/Scenes/Step14.unity
+    path: Assets/Scenes/Practice.unity
     guid: 0b16406ab1577a6448eb5c30409761d3
   - enabled: 1
-    path: Assets/FrostweepGames/GCSpeechRecognition/GCSR_Examples/GCSR_Example_1/GCSR_Example.unity
-    guid: fcb1fc02d0132054d8fa9129bd540ced
+    path: Assets/Scenes/Vocabulary2.unity
+    guid: b65e6b57cbb7c8549b59ca6c27a5529b
+  - enabled: 1
+    path: Assets/Scenes/Advices1.unity
+    guid: 27a11b09fbae65f43a86bcf372a8d0be
   m_configObjects: {}
